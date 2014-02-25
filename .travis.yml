@@ -3,6 +3,7 @@ node_js:
   - "0.10"
   - "0.8"
   - "0.6"
+before_install: npm install -g grunt-cli
 before_script: grunt build
 after_script:
   - mocha -t 60000 --require blanket --reporter mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js
