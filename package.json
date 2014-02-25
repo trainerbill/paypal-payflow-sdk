@@ -45,7 +45,7 @@
         "blanket": {
             "pattern": "paypal-payflow-sdk.js"
         },
-        "test": "mocha --recursive -t 60000"
+        "test": "grunt"
     },
     "readmeFilename": "README.md"
 }
