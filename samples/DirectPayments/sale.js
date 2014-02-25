@@ -5,24 +5,24 @@ require('../../test/configure');
 var sale = payflow_api.getModel("sale");
 
 var data = {
-    ACCT:"4716792779006088",
-    EXPDATE:"1118",
-    CVV2:"111",
-    AMT:"100"
+    ACCT: "4716792779006088",
+    EXPDATE: "1118",
+    CVV2: "111",
+    AMT: "100"
 };
 
-try{
+try {
     sale.exchangeData(data);
     sale.validateData();
 
-    payflow_api.execute(sale.getParameters(),function(err,res){
-        if(err)throw err;
+    payflow_api.execute(sale.getParameters(), function (err, res) {
+        if (err) { throw err; }
         console.log('Success');
         console.log(res);
     });
 
 }
-catch(err)
+catch (err)
 {
     console.log(err);
 }

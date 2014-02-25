@@ -10,42 +10,44 @@ var transaction = function TransactionModel() {
 
     return {
 
-        getParameters: function(){
+        getParameters: function () {
             return parameters;
         },
-        getDefaultParameters: function(){
+        getDefaultParameters: function () {
             return default_parameters;
         },
-        getValidationParameters:function(){
+        getValidationParameters: function () {
             return validation_parameters;
         },
-        setDefaultParameters: function(params){
-            if(typeof params === 'object')
+        setDefaultParameters: function (params) {
+            if (typeof params === 'object')
             {
                 default_parameters = params;
             }
-            else
-                throw "argument is not an object"
+            else {
+                throw "argument is not an object";
+            }
         },
-        setValidationParameters: function(params){
-            if(params instanceof Array)
+        setValidationParameters: function (params) {
+            if (params instanceof Array)
             {
                 validation_parameters = params;
             }
-            else
-                throw "argument is not an array"
+            else {
+                throw "argument is not an array";
+            }
         },
-        exchangeData: function(data){
+        exchangeData: function (data) {
             parameters = {};
-            _.extend(data,default_parameters);
+            _.extend(data, default_parameters);
             parameters = data;
             return parameters;
         },
-        validateData: function(data){
-            validation_parameters.forEach(function(v){
-                if(parameters[v] === undefined)
+        validateData: function (data) {
+            validation_parameters.forEach(function (v) {
+                if (parameters[v] === undefined)
                 {
-                    throw  v+": Required parameter for this transaction is undefined";
+                    throw  v + ": Required parameter for this transaction is undefined";
                 }
             });
         }

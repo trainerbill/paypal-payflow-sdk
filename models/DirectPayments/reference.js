@@ -4,9 +4,9 @@ var reference = function ReferenceModel() {
 
     var transaction = require('../Base/transaction')();
     transaction.setDefaultParameters({
-        TENDER:"C"
+        TENDER: "C"
     });
-    transaction.setValidationParameters(['AMT','TRXTYPE','TENDER','ORIGID']);
+    transaction.setValidationParameters(['AMT', 'TRXTYPE', 'TENDER', 'ORIGID']);
     return transaction;
 };
 

@@ -5,33 +5,33 @@ require('../../test/configure');
 var auth = payflow_api.getModel("authorization");
 var reference = payflow_api.getModel("reference");
 var data = {
-    ACCT:"4716792779006088",
-    EXPDATE:"1118",
-    CVV2:"111",
-    AMT:"100"
+    ACCT: "4716792779006088",
+    EXPDATE: "1118",
+    CVV2: "111",
+    AMT: "100"
 };
 
-try{
+try {
     auth.exchangeData(data);
     auth.validateData();
 
-    payflow_api.execute(auth.getParameters(),function(err,res){
-        if(err)throw err;
+    payflow_api.execute(auth.getParameters(), function (err, res) {
+        if (err) { throw err; }
         console.log('Authorization Success');
         console.log(res);
         reference.exchangeData({
-            ORIGID:res.PNREF,
-            AMT:auth.getParameters().AMT
+            ORIGID: res.PNREF,
+            AMT: auth.getParameters().AMT
         });
-        payflow_api.execute(reference.getParameters(),function(err,res){
-            if(err)throw err;
+        payflow_api.execute(reference.getParameters(), function (err, res) {
+            if (err) { throw err; }
             console.log('Reference Transaction Success');
             console.log(res);
         });
     });
 
 }
-catch(err)
+catch (err)
 {
     console.log(err);
 }

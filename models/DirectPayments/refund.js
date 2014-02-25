@@ -4,10 +4,10 @@ var refund = function RefundModel() {
 
     var transaction = require('../Base/transaction')();
     transaction.setDefaultParameters({
-        TRXTYPE:"C",
-        TENDER:"C"
+        TRXTYPE: "C",
+        TENDER: "C"
     });
-    transaction.setValidationParameters(['TRXTYPE','TENDER','ORIGID']);
+    transaction.setValidationParameters(['TRXTYPE', 'TENDER', 'ORIGID']);
     return transaction;
 };
 

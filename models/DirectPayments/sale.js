@@ -4,10 +4,10 @@ var sale = function SaleModel() {
 
     var transaction = require('../Base/transaction')();
     transaction.setDefaultParameters({
-        TRXTYPE:"S",
-        TENDER:"C"
+        TRXTYPE: "S",
+        TENDER: "C"
     });
-    transaction.setValidationParameters(['AMT','TRXTYPE','TENDER','ACCT','EXPDATE']);
+    transaction.setValidationParameters(['AMT', 'TRXTYPE', 'TENDER', 'ACCT', 'EXPDATE']);
     return transaction;
 };
 

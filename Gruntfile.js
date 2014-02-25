@@ -10,7 +10,7 @@ module.exports = function (grunt) {
 		},
 		jshint: {
 			all: {
-				src: ["lib/*.js", "test/**/*.js", "samples/**/*.js"],
+				src: ["lib/*.js", "test/**/*.js", "samples/**/*.js","models/**/*.js"],
 				options: {
 					jshintrc: ".jshintrc"
 				}
@@ -21,9 +21,7 @@ module.exports = function (grunt) {
 				timeout: 60000
 
 			},
-			all: {
-				src: 'test/**/*.js'
-			}
+            all: { src: ['test/**/*.js'] }
 		}
 	});
 

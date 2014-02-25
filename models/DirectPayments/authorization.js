@@ -4,10 +4,10 @@ var authorization = function AuthorizationModel() {
 
     var transaction = require('../Base/transaction')();
     transaction.setDefaultParameters({
-        TRXTYPE:"A",
-        TENDER:"C"
+        TRXTYPE: "A",
+        TENDER: "C"
     });
-    transaction.setValidationParameters(['AMT','TRXTYPE','TENDER','ACCT','EXPDATE']);
+    transaction.setValidationParameters(['AMT', 'TRXTYPE', 'TENDER', 'ACCT', 'EXPDATE']);
     return transaction;
 };
 

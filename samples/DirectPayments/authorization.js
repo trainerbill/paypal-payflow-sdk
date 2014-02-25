@@ -11,18 +11,18 @@ var data = {
     AMT: "100"
 };
 
-try{
+try {
     auth.exchangeData(data);
     auth.validateData();
 
-    payflow_api.execute(auth.getParameters(),function(err,res){
-        if(err) throw err;
+    payflow_api.execute(auth.getParameters(), function (err, res) {
+        if (err) { throw err; }
         console.log('Success');
         console.log(res);
     });
 
 }
-catch(err)
+catch (err)
 {
     console.log(err);
 }
