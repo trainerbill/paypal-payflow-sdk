@@ -4,7 +4,7 @@ var chai = require('chai'),
     expect = chai.expect,
     should = chai.should();
 
-var payflow_sdk = require('../paypal-payflow-sdk');
+var payflow_sdk = require('../');
 require('./configure');
 
 

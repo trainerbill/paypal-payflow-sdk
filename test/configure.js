@@ -1,6 +1,6 @@
 "use strict";
 
-var payflow_sdk = require('../paypal-payflow-sdk');
+var payflow_sdk = require('../');
 
 payflow_sdk.configure({
     "host": "pilot-payflowpro.paypal.com",
