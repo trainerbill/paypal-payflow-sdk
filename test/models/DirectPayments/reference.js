@@ -7,25 +7,25 @@ var chai = require('chai'),
 var payflow_api = require('../../../');
 require('../../configure');
 
-var sale = payflow_api.getModel("sale");
+var ref = payflow_api.getModel("reference");
+var auth = payflow_api.getModel("authorization");
 
-describe('SaleModel', function () {
+describe('ReferenceModel', function () {
     describe('Construction', function () {
         it('should return an object with the correct properties',function(){
 
             //Check parameters
-            sale.getParameters().should.be.a('object');
+            ref.getParameters().should.be.a('object');
 
             //Check default parameters
-            sale.getDefaultParameters().should.be.a('object');
-            sale.getDefaultParameters().should.have.property('TRXTYPE');
-            sale.getDefaultParameters().TRXTYPE.should.equal("S");
-            sale.getDefaultParameters().should.have.property('TENDER');
-            sale.getDefaultParameters().TENDER.should.equal("C");
+            ref.getDefaultParameters().should.be.a('object');
+
+            ref.getDefaultParameters().should.have.property('TENDER');
+            ref.getDefaultParameters().TENDER.should.equal("C");
 
             //Check validation parameters
-            sale.getValidationParameters().should.be.a('array');
-            sale.getValidationParameters().should.have.length(5);
+            ref.getValidationParameters().should.be.a('array');
+            ref.getValidationParameters().should.have.length(4);
 
         });
     });
@@ -40,14 +40,14 @@ describe('SaleModel', function () {
             };
 
 
-            sale.exchangeData(data);
-            var params = sale.getParameters();
+            ref.exchangeData(data);
+            var params = ref.getParameters();
             params.should.have.property('TRXTYPE');
             params.should.have.property('TENDER');
             params.should.have.property('AMT');
             params.should.have.property('EXPDATE');
             //TRXTYPE and TENDER should be overridden by the model defaults
-            params.TRXTYPE.should.equal("S");
+            params.TRXTYPE.should.equal("A");
             params.TENDER.should.equal("C");
             params.AMT.should.equal("100");
             params.EXPDATE.should.equal("1118");
@@ -59,27 +59,25 @@ describe('SaleModel', function () {
     describe('validateData', function () {
         it('Should not throw',function(){
             var data = {
-                ACCT:"4716792779006088",
-                EXPDATE:"1118",
-                CVV2:"111",
+                TRXTYPE:"A",
+                ORIGID:"asdfasdfasdf",
                 AMT:"100"
             };
-            sale.exchangeData(data);
-            expect(sale.validateData).to.not.throw();
+            ref.exchangeData(data);
+            expect(ref.validateData).to.not.throw();
         });
         it('Should throw',function(){
             var data = {
-                ACCT:"4716792779006088",
-                EXPDATE:"1118",
-                CVV2:"111"
+                TRXTYPE:"A",
+                ORIGID:"asdfasdfasdf"
             };
-            sale.exchangeData(data);
-            expect(sale.validateData).to.throw('AMT: Required parameter for this transaction is undefined');
+            ref.exchangeData(data);
+            expect(ref.validateData).to.throw('AMT: Required parameter for this transaction is undefined');
         });
     });
 });
 
-describe('ExecuteSale', function () {
+describe('ExecuteReferenceTransaction', function () {
     it('Should Return Result 0',function(done){
         var data = {
             ACCT:"4716792779006088",
@@ -89,15 +87,21 @@ describe('ExecuteSale', function () {
         };
 
         try{
-            sale.exchangeData(data);
-            sale.validateData();
+            auth.exchangeData(data);
+            auth.validateData();
 
-            payflow_api.execute(sale.getParameters(),function(err,res){
-                ;
-                if (err) done(err);
-                res.RESULT.should.equal("0");
+            payflow_api.execute(auth.getParameters(),function(err,res){
+                if(err)done(err);
 
-                done();
+                ref.exchangeData({
+                    ORIGID:res.PNREF,
+                    AMT:auth.getParameters().AMT
+                });
+                payflow_api.execute(ref.getParameters(),function(err,res){
+                    if(err)done(err);
+                    res.RESULT.should.equal("0");
+                    done();
+                });
             });
 
         }

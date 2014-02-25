@@ -10,7 +10,7 @@ require('./configure');
 
 describe('SDK', function () {
     describe('Execute', function () {
-        it('execute',function(){
+        it('execute',function(done){
             var data = {
                 TRXTYPE:"S",
                 TENDER:"C",
@@ -19,10 +19,10 @@ describe('SDK', function () {
                 CVV2:"111",
                 AMT:"100"
             };
-            payflow_sdk.execute(data,function(error,data){
-                expect(error).equal(null);
-                expect(data.RESULT).equal("0");
-
+            payflow_sdk.execute(data,function(err,res){
+                if (err) done(err);
+                expect(err).equal(null);
+                expect(res.RESULT).equal("0");
                 done();
             });
         });
