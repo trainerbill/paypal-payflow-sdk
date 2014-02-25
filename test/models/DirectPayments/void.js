@@ -12,7 +12,7 @@ var voidtrx = payflow_api.getModel("void");
 
 describe('VoidModel', function () {
     describe('Construction', function () {
-        it('should return an object with the correct properties',function(){
+        it('should return an object with the correct properties', function () {
 
             //Check parameters
             voidtrx.getParameters().should.be.a('object');
@@ -31,13 +31,13 @@ describe('VoidModel', function () {
         });
     });
     describe('exchangeData', function () {
-        it('should populate the object parameters variable',function(){
+        it('should populate the object parameters variable', function () {
 
             var data = {
-                TRXTYPE:"A",
-                TENDER:"P",
-                AMT:"100",
-                EXPDATE:"1118"
+                TRXTYPE: "A",
+                TENDER: "P",
+                AMT: "100",
+                EXPDATE: "1118"
             };
 
 
@@ -58,15 +58,15 @@ describe('VoidModel', function () {
     });
 
     describe('validateData', function () {
-        it('Should not throw',function(){
+        it('Should not throw', function () {
             var data = {
-                ORIGID:"asdfasdfasdf",
+                ORIGID: "asdfasdfasdf"
 
             };
             voidtrx.exchangeData(data);
             expect(voidtrx.validateData).to.not.throw();
         });
-        it('Should throw',function(){
+        it('Should throw', function () {
             var data = {
 
             };
@@ -77,33 +77,33 @@ describe('VoidModel', function () {
 });
 
 describe('ExecuteVoid', function () {
-    it('Should Return Result 0',function(done){
+    it('Should Return Result 0', function (done) {
         var data = {
-            ACCT:"4716792779006088",
-            EXPDATE:"1118",
-            CVV2:"111",
-            AMT:"100"
+            ACCT: "4716792779006088",
+            EXPDATE: "1118",
+            CVV2: "111",
+            AMT: "100"
         };
 
-        try{
+        try {
             auth.exchangeData(data);
             auth.validateData();
 
-            payflow_api.execute(auth.getParameters(),function(err,res){
-                if(err)done(err);
+            payflow_api.execute(auth.getParameters(), function (err, res) {
+                if (err) { done(err); }
 
                 voidtrx.exchangeData({
-                    ORIGID:res.PNREF
+                    ORIGID: res.PNREF
                 });
-                payflow_api.execute(voidtrx.getParameters(),function(err,res){
-                    if(err)done(err);
+                payflow_api.execute(voidtrx.getParameters(), function (err, res) {
+                    if (err) { done(err); }
                     res.RESULT.should.equal("0");
                     done();
                 });
             });
 
         }
-        catch(err)
+        catch (err)
         {
             console.log(err);
         }

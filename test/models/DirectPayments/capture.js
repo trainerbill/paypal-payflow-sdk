@@ -12,7 +12,7 @@ var auth = payflow_api.getModel("authorization");
 
 describe('CaptureModel', function () {
     describe('Construction', function () {
-        it('should return an object with the correct properties',function(){
+        it('should return an object with the correct properties', function () {
 
             //Check parameters
             cap.getParameters().should.be.a('object');
@@ -31,13 +31,13 @@ describe('CaptureModel', function () {
         });
     });
     describe('exchangeData', function () {
-        it('should populate the object parameters variable',function(){
+        it('should populate the object parameters variable', function () {
 
             var data = {
-                TRXTYPE:"A",
-                TENDER:"P",
-                AMT:"100",
-                EXPDATE:"1118"
+                TRXTYPE: "A",
+                TENDER: "P",
+                AMT: "100",
+                EXPDATE: "1118"
             };
 
 
@@ -58,17 +58,17 @@ describe('CaptureModel', function () {
     });
 
     describe('validateData', function () {
-        it('Should not throw',function(){
+        it('Should not throw', function () {
             var data = {
-                ORIGID:"asdfasdfasdf",
-                AMT:"100"
+                ORIGID: "asdfasdfasdf",
+                AMT: "100"
             };
             cap.exchangeData(data);
             expect(cap.validateData).to.not.throw();
         });
-        it('Should throw',function(){
+        it('Should throw', function () {
             var data = {
-                ORIGID:"asdfasdfasdf"
+                ORIGID: "asdfasdfasdf"
             };
             cap.exchangeData(data);
             expect(cap.validateData).to.throw('AMT: Required parameter for this transaction is undefined');
@@ -77,34 +77,34 @@ describe('CaptureModel', function () {
 });
 
 describe('ExecuteCapture', function () {
-    it('Should Return Result 0',function(done){
+    it('Should Return Result 0', function (done) {
         var data = {
-            ACCT:"4716792779006088",
-            EXPDATE:"1118",
-            CVV2:"111",
-            AMT:"100"
+            ACCT: "4716792779006088",
+            EXPDATE: "1118",
+            CVV2: "111",
+            AMT: "100"
         };
 
-        try{
+        try {
             auth.exchangeData(data);
             auth.validateData();
 
-            payflow_api.execute(auth.getParameters(),function(err,res){
-                if(err)done(err);
+            payflow_api.execute(auth.getParameters(), function (err, res) {
+                if (err) { done(err); }
 
                 cap.exchangeData({
-                    ORIGID:res.PNREF,
-                    AMT:auth.getParameters().AMT
+                    ORIGID: res.PNREF,
+                    AMT: auth.getParameters().AMT
                 });
-                payflow_api.execute(cap.getParameters(),function(err,res){
-                    if(err)done(err);
+                payflow_api.execute(cap.getParameters(), function (err, res) {
+                    if (err) { done(err); }
                     res.RESULT.should.equal("0");
                     done();
                 });
             });
 
         }
-        catch(err)
+        catch (err)
         {
             console.log(err);
         }

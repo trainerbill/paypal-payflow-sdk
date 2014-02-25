@@ -10,7 +10,7 @@ module.exports = function (grunt) {
 		},
 		jshint: {
 			all: {
-				src: ["lib/*.js", "test/*.js", "samples/**/*.js"],
+				src: ["lib/*.js", "test/**/*.js", "samples/**/*.js"],
 				options: {
 					jshintrc: ".jshintrc"
 				}
@@ -18,10 +18,11 @@ module.exports = function (grunt) {
 		},
 		simplemocha: {
 			options: {
-				timeout: 30000,
+				timeout: 60000
+
 			},
 			all: {
-				src: 'test/*.js'
+				src: 'test/**/*.js'
 			}
 		}
 	});

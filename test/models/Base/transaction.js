@@ -12,7 +12,7 @@ var trx = require('../../../models/Base/transaction')();
 describe('TransactionModel', function () {
 
     describe('Construction', function () {
-        it('should return an object with the correct properties',function(){
+        it('should return an object with the correct properties', function () {
 
             trx.should.have.property('getParameters');
             trx.should.have.property('getDefaultParameters');
@@ -35,13 +35,13 @@ describe('TransactionModel', function () {
         });
     });
     describe('exchangeData', function () {
-        it('should populate the object parameters variable',function(){
+        it('should populate the object parameters variable', function () {
 
             var data = {
-                TRXTYPE:"A",
-                TENDER:"P",
-                AMT:"100",
-                EXPDATE:"1118"
+                TRXTYPE: "A",
+                TENDER: "P",
+                AMT: "100",
+                EXPDATE: "1118"
             };
 
             trx.exchangeData(data);
@@ -61,18 +61,18 @@ describe('TransactionModel', function () {
         });
     });
     describe('getParameters', function () {
-        it('should return an object',function(){
+        it('should return an object', function () {
             trx.getParameters().should.be.a('object');
         });
     });
     describe('getDefaultParameters', function () {
-        it('should return an object',function(){
+        it('should return an object', function () {
             trx.getDefaultParameters().should.be.a('object');
         });
     });
 
     describe('getValidationParameters', function () {
-        it('should return an array',function(){
+        it('should return an array', function () {
             trx.getValidationParameters().should.be.a('array');
         });
     });
