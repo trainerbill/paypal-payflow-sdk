@@ -34,9 +34,9 @@ Execute API Call.  Send in parameters from helper model
 ```js
 payflow.execute(sale.getParameters(), function(err, data) {
     if (err) {
-
+        console.log(err.message);
         res.writeHead(500, { 'Content-Type': 'application/json' });
-        res.write(JSON.stringify(data));
+        res.write(JSON.stringify({message: err.message}));
         res.end();
     }
     else {
@@ -58,11 +58,18 @@ var data = {
     AMT: "100"
 };
 
-payflow_api.execute(data, function (err, res) {
-    if (err) { done(err); }
-    expect(err).equal(null);
-    expect(res.RESULT).equal("0");
-    done();
+payflow.execute(sale.getParameters(), function(err, data) {
+    if (err) {
+        console.log(err.message);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.write(JSON.stringify({message: err.message}));
+        res.end();
+    }
+    else {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.write(JSON.stringify(data));
+        res.end();
+    }
 });
 ```
 Running Tests
