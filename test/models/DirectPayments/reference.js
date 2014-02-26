@@ -95,8 +95,10 @@ describe('ExecuteReferenceTransaction', function () {
 
                 ref.exchangeData({
                     ORIGID: res.PNREF,
-                    AMT: auth.getParameters().AMT
+                    AMT: auth.getParameters().AMT,
+                    TRXTYPE: "S"
                 });
+                ref.validateData();
                 payflow_api.execute(ref.getParameters(), function (err, res) {
                     if (err) { done(err); }
                     res.RESULT.should.equal("0");
