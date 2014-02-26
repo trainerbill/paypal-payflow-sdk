@@ -29,6 +29,20 @@ Use Helper to get Models
 ```js
 var sale = payflow.getModel('sale');
 ```
+Exchange Data with model
+```js
+var data = {
+    ACCT: "4716792779006088",
+    EXPDATE: "1118",
+    CVV2: "111",
+    AMT: "100"
+};
+sale.exchangeData(data);
+```
+Validate the data based on the model
+```js
+sale.validateData();
+```
 
 Execute API Call.  Send in parameters from helper model
 ```js
