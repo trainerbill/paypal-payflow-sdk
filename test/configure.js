@@ -1,8 +1,8 @@
 "use strict";
 
-var payflow_sdk = require('../');
+var payflow_api = require('../');
 
-payflow_sdk.configure({
+payflow_api.configure({
     "host": "pilot-payflowpro.paypal.com",
     "port": "443",
     "credentials": {

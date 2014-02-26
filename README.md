@@ -25,6 +25,20 @@ Require SDK
 ```js
 var payflow = require('paypal-payflow-sdk');
 ```
+Configure SDK
+```js
+payflow.configure({
+    "host": "pilot-payflowpro.paypal.com",
+    "port": "443",
+    "credentials": {
+        "PARTNER": "",
+        "VENDOR": "",
+        "USER": "",
+        "PWD": ""
+    }
+});
+```
+
 Use Helper to get Models
 ```js
 var sale = payflow.getModel('sale');
