@@ -72,7 +72,7 @@ var data = {
     AMT: "100"
 };
 
-payflow.execute(sale.getParameters(), function(err, data) {
+payflow.execute(data, function(err, data) {
     if (err) {
         console.log(err.message);
         res.writeHead(500, { 'Content-Type': 'application/json' });
