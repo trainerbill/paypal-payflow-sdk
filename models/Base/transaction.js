@@ -20,21 +20,19 @@ var transaction = function TransactionModel() {
             return validation_parameters;
         },
         setDefaultParameters: function (params) {
-            if (typeof params === 'object')
-            {
+            if (typeof params === 'object') {
                 default_parameters = params;
             }
             else {
-                throw "argument is not an object";
+                throw new Error("argument is not an object");
             }
         },
         setValidationParameters: function (params) {
-            if (params instanceof Array)
-            {
+            if (params instanceof Array) {
                 validation_parameters = params;
             }
             else {
-                throw "argument is not an array";
+                throw new Error("argument is not an array");
             }
         },
         exchangeData: function (data) {
@@ -45,9 +43,8 @@ var transaction = function TransactionModel() {
         },
         validateData: function (data) {
             validation_parameters.forEach(function (v) {
-                if (parameters[v] === undefined)
-                {
-                    throw  v + ": Required parameter for this transaction is undefined";
+                if (parameters[v] === undefined) {
+                    throw  new Error(v + ": Required parameter for this transaction is undefined");
                 }
             });
         }
