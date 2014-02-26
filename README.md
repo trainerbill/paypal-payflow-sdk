@@ -15,8 +15,8 @@ npm install
 Examples
 ==================
 ```sh
-node examples/DirectPayments/sale.js
-node examples/DirectPayments/refund.js
+node samples/DirectPayments/sale.js
+node samples/DirectPayments/refund.js
 ```
 
 Usage
