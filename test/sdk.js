@@ -23,7 +23,7 @@ describe('SDK', function () {
             payflow_api.execute(data, function (err, res) {
                 if (err) { done(err); }
                 expect(err).equal(null);
-                expect(res.RESULT).equal("0");
+                expect(res.response.decoded.RESULT).equal("0");
                 done();
             });
         });

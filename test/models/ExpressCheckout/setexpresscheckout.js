@@ -96,7 +96,7 @@ describe('ExecuteSetExpressCheckout', function () {
 
             payflow_api.execute(setec.getParameters(), function (err, res) {
                 if (err) { done(err); }
-                res.RESULT.should.equal("0");
+                res.response.decoded.RESULT.should.equal("0");
                 done();
             });
 

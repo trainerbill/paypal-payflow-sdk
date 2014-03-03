@@ -94,17 +94,17 @@ describe('ExecuteCapture', function () {
                 if (err) { done(err); }
 
                 cap.exchangeData({
-                    ORIGID: res.PNREF,
+                    ORIGID: res.response.decoded.PNREF,
                     AMT: auth.getParameters().AMT
                 });
                 payflow_api.execute(cap.getParameters(), function (err, res) {
                     if (err) { done(err); }
                     refund.exchangeData({
-                        ORIGID: res.PNREF,
+                        ORIGID: res.response.decoded.PNREF,
                     });
                     payflow_api.execute(refund.getParameters(), function (err, res) {
                         if (err) { done(err); }
-                        res.RESULT.should.equal("0");
+                        res.response.decoded.RESULT.should.equal("0");
                         done();
                     });
                 });

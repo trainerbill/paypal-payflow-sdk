@@ -93,11 +93,11 @@ describe('ExecuteVoid', function () {
                 if (err) { done(err); }
 
                 voidtrx.exchangeData({
-                    ORIGID: res.PNREF
+                    ORIGID: res.response.decoded.PNREF
                 });
                 payflow_api.execute(voidtrx.getParameters(), function (err, res) {
                     if (err) { done(err); }
-                    res.RESULT.should.equal("0");
+                    res.response.decoded.RESULT.should.equal("0");
                     done();
                 });
             });
