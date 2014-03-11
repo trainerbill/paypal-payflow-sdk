@@ -75,7 +75,7 @@ describe('CaptureModel', function () {
         });
     });
 });
-
+/*
 describe('ExecuteCapture', function () {
     it('Should Return Result 0', function (done) {
         var data = {
@@ -110,3 +110,4 @@ describe('ExecuteCapture', function () {
         }
     });
 });
+*/
