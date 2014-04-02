@@ -75,7 +75,7 @@ describe('VoidModel', function () {
         });
     });
 });
-/*
+
 describe('ExecuteVoid', function () {
     it('Should Return Result 0', function (done) {
         var data = {
@@ -109,4 +109,3 @@ describe('ExecuteVoid', function () {
         }
     });
 });
-*/

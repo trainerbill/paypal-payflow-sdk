@@ -78,7 +78,7 @@ describe('SaleModel', function () {
         });
     });
 });
-/*
+
 describe('ExecuteSale', function () {
     it('Should Return Result 0', function (done) {
         var data = {
@@ -106,4 +106,3 @@ describe('ExecuteSale', function () {
         }
     });
 });
-*/

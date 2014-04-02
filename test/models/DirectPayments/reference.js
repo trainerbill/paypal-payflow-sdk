@@ -76,7 +76,7 @@ describe('ReferenceModel', function () {
         });
     });
 });
-/*
+
 describe('ExecuteReferenceTransaction', function () {
     it('Should Return Result 0', function (done) {
         var data = {
@@ -113,4 +113,3 @@ describe('ExecuteReferenceTransaction', function () {
         }
     });
 });
-*/

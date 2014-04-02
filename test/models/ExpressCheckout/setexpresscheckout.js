@@ -80,7 +80,7 @@ describe('SetExpressCheckoutModel', function () {
         });
     });
 });
-/*
+
 describe('ExecuteSetExpressCheckout', function () {
     it('Should Return Result 0', function (done) {
         var data = {
@@ -107,4 +107,3 @@ describe('ExecuteSetExpressCheckout', function () {
         }
     });
 });
-*/

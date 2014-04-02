@@ -78,7 +78,7 @@ describe('AuthorizationModel', function () {
         });
     });
 });
-/*
+
 describe('ExecuteAuthorization', function () {
     it('Should Return Result 0', function (done) {
         var data = {
@@ -105,4 +105,3 @@ describe('ExecuteAuthorization', function () {
         }
     });
 });
-*/
