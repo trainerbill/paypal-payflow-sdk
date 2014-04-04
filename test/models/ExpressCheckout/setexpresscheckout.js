@@ -7,7 +7,7 @@ var chai = require('chai'),
 var payflow_api = require('../../../');
 require('../../configure');
 
-var setec = payflow_api.getModel("setec");
+var setec = payflow_api.getModel("setexpresscheckout");
 
 describe('SetExpressCheckoutModel', function () {
     describe('Construction', function () {

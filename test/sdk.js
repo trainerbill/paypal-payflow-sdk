@@ -35,9 +35,9 @@ describe('SDK', function () {
             payflow_api.getModel("refund").should.be.a('object');
             payflow_api.getModel("reference").should.be.a('object');
             payflow_api.getModel("void").should.be.a('object');
-            payflow_api.getModel("setec").should.be.a('object');
-            payflow_api.getModel("getec").should.be.a('object');
-            payflow_api.getModel("doec").should.be.a('object');
+            payflow_api.getModel("setexpresscheckout").should.be.a('object');
+            payflow_api.getModel("getexpresscheckout").should.be.a('object');
+            payflow_api.getModel("doexpresscheckout").should.be.a('object');
         });
     });
 });
