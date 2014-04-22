@@ -5,12 +5,14 @@ require('../../test/configure');
 var createRecurringBillingProfile = payflow_api.getModel("createRecurringBillingProfile");
 
 //Create datestring for START
-var date = new Date;
+var date = new Date();
 var month = date.getMonth() + 2;
-if (month < 10)
+if (month < 10) {
     month = '0' + month;
-else if (month > 12)
+}
+else if (month > 12) {
     month = '01';
+}
 var day = date.getDate();
 var year = date.getFullYear();
 var datestring = '' + month + day + year;
