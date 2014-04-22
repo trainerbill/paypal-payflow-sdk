@@ -20,9 +20,6 @@ describe('ReferenceModel', function () {
             //Check default parameters
             ref.getDefaultParameters().should.be.a('object');
 
-            ref.getDefaultParameters().should.have.property('TENDER');
-            ref.getDefaultParameters().TENDER.should.equal("C");
-
             //Check validation parameters
             ref.getValidationParameters().should.be.a('array');
             ref.getValidationParameters().should.have.length(4);
@@ -46,9 +43,8 @@ describe('ReferenceModel', function () {
             params.should.have.property('TENDER');
             params.should.have.property('AMT');
             params.should.have.property('EXPDATE');
-            //TRXTYPE and TENDER should be overridden by the model defaults
             params.TRXTYPE.should.equal("A");
-            params.TENDER.should.equal("C");
+            params.TENDER.should.equal("P");
             params.AMT.should.equal("100");
             params.EXPDATE.should.equal("1118");
 
@@ -60,6 +56,7 @@ describe('ReferenceModel', function () {
         it('Should not throw', function () {
             var data = {
                 TRXTYPE: "A",
+                TENDER: "C",
                 ORIGID: "asdfasdfasdf",
                 AMT: "100"
             };
@@ -69,6 +66,7 @@ describe('ReferenceModel', function () {
         it('Should throw', function () {
             var data = {
                 TRXTYPE: "A",
+                TENDER: "C",
                 ORIGID: "asdfasdfasdf"
             };
             ref.exchangeData(data);
@@ -96,7 +94,8 @@ describe('ExecuteReferenceTransaction', function () {
                 ref.exchangeData({
                     ORIGID: res.response.decoded.PNREF,
                     AMT: auth.getParameters().AMT,
-                    TRXTYPE: "S"
+                    TRXTYPE: "S",
+                    TENDER: "C"
                 });
                 ref.validateData();
                 payflow_api.execute(ref.getParameters(), function (err, res) {

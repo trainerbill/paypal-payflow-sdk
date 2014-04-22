@@ -20,7 +20,7 @@ try {
         console.log('Authorization Success');
         console.log(res);
         voidtrx.exchangeData({
-            ORIGID: res.PNREF,
+            ORIGID: res.response.decoded.PNREF
         });
         payflow_api.execute(voidtrx.getParameters(), function (err, res) {
             if (err) { throw err; }

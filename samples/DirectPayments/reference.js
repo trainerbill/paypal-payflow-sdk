@@ -20,9 +20,12 @@ try {
         console.log('Authorization Success');
         console.log(res);
         reference.exchangeData({
-            ORIGID: res.PNREF,
-            AMT: auth.getParameters().AMT
+            ORIGID: res.response.decoded.PNREF,
+            AMT: auth.getParameters().AMT,
+            TENDER: "C",
+            TRXTYPE: "S"
         });
+        console.log(reference.getParameters());
         payflow_api.execute(reference.getParameters(), function (err, res) {
             if (err) { throw err; }
             console.log('Reference Transaction Success');

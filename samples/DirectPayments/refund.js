@@ -21,7 +21,7 @@ try {
         console.log('Authorization Success');
         console.log(res);
         cap.exchangeData({
-            ORIGID: res.PNREF,
+            ORIGID: res.response.decoded.PNREF,
             AMT: auth.getParameters().AMT
         });
         payflow_api.execute(cap.getParameters(), function (err, res) {
@@ -29,7 +29,7 @@ try {
             console.log('Capture Success');
             console.log(res);
             refund.exchangeData({
-                ORIGID: res.PNREF
+                ORIGID: res.response.decoded.PNREF
             });
             refund.validateData();
             payflow_api.execute(refund.getParameters(), function (err, res) {

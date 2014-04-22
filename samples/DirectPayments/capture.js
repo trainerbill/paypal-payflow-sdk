@@ -20,7 +20,7 @@ try {
         console.log('Authorization Success');
         console.log(res);
         cap.exchangeData({
-            ORIGID: res.PNREF,
+            ORIGID: res.response.decoded.PNREF,
             AMT: auth.getParameters().AMT
         });
         payflow_api.execute(cap.getParameters(), function (err, res) {
