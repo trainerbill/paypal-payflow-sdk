@@ -4,12 +4,12 @@ var chai = require('chai'),
     expect = chai.expect,
     should = chai.should();
 
-var payflow_api = require('../../../');
-require('../../configure');
+var payflow_api = require('../../../../');
+require('../../../configure');
 
-var setec = payflow_api.getModel("setexpresscheckout");
+var setec = payflow_api.getModel("setexpresscheckoutrb");
 
-describe('SetExpressCheckoutModel', function () {
+describe('SetExpressCheckoutModel-Recurring Billing', function () {
     describe('Construction', function () {
         it('should return an object with the correct properties', function () {
 
@@ -22,10 +22,12 @@ describe('SetExpressCheckoutModel', function () {
             setec.getDefaultParameters().ACTION.should.equal("S");
             setec.getDefaultParameters().should.have.property('TENDER');
             setec.getDefaultParameters().TENDER.should.equal("P");
+            setec.getDefaultParameters().should.have.property('BILLINGTYPE');
+            setec.getDefaultParameters().BILLINGTYPE.should.equal("RecurringBilling");
 
             //Check validation parameters
             setec.getValidationParameters().should.be.a('array');
-            setec.getValidationParameters().should.have.length(6);
+            setec.getValidationParameters().should.have.length(7);
 
         });
     });
@@ -36,7 +38,8 @@ describe('SetExpressCheckoutModel', function () {
                 TRXTYPE: "A",
                 ACTION: "G",
                 TENDER: "C",
-                AMT: "100"
+                AMT: "100",
+                BILLINGTYPE: "adfasdf"
             };
 
 
@@ -46,10 +49,12 @@ describe('SetExpressCheckoutModel', function () {
             params.should.have.property('TENDER');
             params.should.have.property('AMT');
             params.should.have.property('ACTION');
+            params.should.have.property('BILLINGTYPE');
             //ACTION and TENDER should be overridden by the model defaults
             params.ACTION.should.equal("S");
             params.TENDER.should.equal("P");
             params.AMT.should.equal("100");
+            params.BILLINGTYPE.should.equal("RecurringBilling");
 
 
 

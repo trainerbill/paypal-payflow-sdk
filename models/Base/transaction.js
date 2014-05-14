@@ -19,9 +19,25 @@ var transaction = function TransactionModel() {
         getValidationParameters: function () {
             return validation_parameters;
         },
+        appendDefaultParameters: function (params) {
+            if (typeof params === 'object') {
+                _.extend(default_parameters, params);
+            }
+            else {
+                throw new Error("argument is not an object");
+            }
+        },
         setDefaultParameters: function (params) {
             if (typeof params === 'object') {
                 default_parameters = params;
+            }
+            else {
+                throw new Error("argument is not an object");
+            }
+        },
+        appendValidationParameters: function (params) {
+            if (typeof params === 'object') {
+                validation_parameters = validation_parameters.concat(params);
             }
             else {
                 throw new Error("argument is not an object");

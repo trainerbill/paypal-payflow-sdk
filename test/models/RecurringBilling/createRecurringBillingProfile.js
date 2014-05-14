@@ -7,10 +7,11 @@ var chai = require('chai'),
 var payflow_api = require('../../../');
 require('../../configure');
 
-var createRecurringBillingProfile = payflow_api.getModel("createRecurringBillingProfile");
+var createRecurringBillingProfile = payflow_api.getModel("createrecurringbillingprofile");
+var eccreateRecurringBillingProfile = payflow_api.getModel("eccreaterecurringbillingprofile");
 
 describe('createRecurringBillingProfileModel', function () {
-    describe('Construction', function () {
+    describe('DCC Construction', function () {
         it('should return an object with the correct properties', function () {
 
             //Check parameters
@@ -20,14 +21,33 @@ describe('createRecurringBillingProfileModel', function () {
             createRecurringBillingProfile.getDefaultParameters().should.be.a('object');
             createRecurringBillingProfile.getDefaultParameters().should.have.property('TRXTYPE');
             createRecurringBillingProfile.getDefaultParameters().TRXTYPE.should.equal("R");
-            createRecurringBillingProfile.getDefaultParameters().should.have.property('TENDER');
-            createRecurringBillingProfile.getDefaultParameters().TENDER.should.equal("C");
             createRecurringBillingProfile.getDefaultParameters().should.have.property('ACTION');
             createRecurringBillingProfile.getDefaultParameters().ACTION.should.equal("A");
 
             //Check validation parameters
             createRecurringBillingProfile.getValidationParameters().should.be.a('array');
-            createRecurringBillingProfile.getValidationParameters().should.have.length(9);
+            createRecurringBillingProfile.getValidationParameters().should.have.length(7);
+
+        });
+    });
+    describe('EC Construction', function () {
+        it('should return an object with the correct properties', function () {
+
+            //Check parameters
+            eccreateRecurringBillingProfile.getParameters().should.be.a('object');
+
+            //Check default parameters
+            eccreateRecurringBillingProfile.getDefaultParameters().should.be.a('object');
+            eccreateRecurringBillingProfile.getDefaultParameters().should.have.property('TRXTYPE');
+            eccreateRecurringBillingProfile.getDefaultParameters().TRXTYPE.should.equal("R");
+            eccreateRecurringBillingProfile.getDefaultParameters().should.have.property('ACTION');
+            eccreateRecurringBillingProfile.getDefaultParameters().ACTION.should.equal("A");
+            eccreateRecurringBillingProfile.getDefaultParameters().should.have.property('TENDER');
+            eccreateRecurringBillingProfile.getDefaultParameters().TENDER.should.equal("P");
+
+            //Check validation parameters
+            eccreateRecurringBillingProfile.getValidationParameters().should.be.a('array');
+            eccreateRecurringBillingProfile.getValidationParameters().should.have.length(8);
 
         });
     });
@@ -36,8 +56,8 @@ describe('createRecurringBillingProfileModel', function () {
 
             var data = {
                 TRXTYPE: "R",
-                TENDER: "P",
-                ACTION: "C",
+                TENDER: "C",
+                ACTION: "A",
                 AMT: "100",
                 EXPDATE: "1118"
             };
@@ -49,7 +69,7 @@ describe('createRecurringBillingProfileModel', function () {
             params.should.have.property('TENDER');
             params.should.have.property('AMT');
             params.should.have.property('EXPDATE');
-            //TRXTYPE and TENDER AND ACTION should be overridden by the model defaults
+            //TRXTYPE AND ACTION should be overridden by the model defaults
             params.TRXTYPE.should.equal("R");
             params.TENDER.should.equal("C");
             params.ACTION.should.equal("A");
@@ -66,6 +86,7 @@ describe('createRecurringBillingProfileModel', function () {
                 ACCT: "4716792779006088",
                 EXPDATE: "1118",
                 CVV2: "111",
+                TENDER: "C",
                 AMT: "100",
                 START: "02272014",
                 TERM: "0",
@@ -80,6 +101,7 @@ describe('createRecurringBillingProfileModel', function () {
                 ACCT: "4716792779006088",
                 EXPDATE: "1118",
                 CVV2: "111",
+                TENDER: "C",
                 AMT: "100",
                 START: "02271983",
                 TERM: "0",
@@ -97,6 +119,7 @@ describe('ExecuteCreateRecurringProfile', function () {
             ACCT: "4716792779006088",
             EXPDATE: "1118",
             CVV2: "111",
+            TENDER: "C",
             AMT: "100",
             START: "02272020",
             TERM: "0",

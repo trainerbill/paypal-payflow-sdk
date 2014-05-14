@@ -1,8 +1,8 @@
 'use strict';
 
-var payflow_api = require('../../');
-require('../../test/configure');
-var setec = payflow_api.getModel("setexpresscheckout");
+var payflow_api = require('../../../');
+require('../../../test/configure');
+var setec = payflow_api.getModel("setexpresscheckoutrb");
 
 var data = {
     TRXTYPE: "S",

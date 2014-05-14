@@ -71,11 +71,66 @@ describe('TransactionModel', function () {
         });
     });
 
+    describe('setDefaultParameters', function () {
+        it('should set default parameters', function () {
+            trx.setDefaultParameters({TRXTYPE: "S", TENDER: "C"});
+            trx.getDefaultParameters().should.be.a('object');
+            trx.getDefaultParameters().should.have.property('TRXTYPE');
+            trx.getDefaultParameters().TRXTYPE.should.equal("S");
+            trx.getDefaultParameters().should.have.property('TENDER');
+            trx.getDefaultParameters().TENDER.should.equal("C");
+
+        });
+    });
+
+    describe('appendDefaultParameters', function () {
+        it('should append default parameters', function () {
+            trx.setDefaultParameters({TRXTYPE: "S", TENDER: "C"});
+            trx.appendDefaultParameters({AMT: "10", EXPDATE: "0210"});
+            trx.getDefaultParameters().should.be.a('object');
+            trx.getDefaultParameters().should.have.property('TRXTYPE');
+            trx.getDefaultParameters().TRXTYPE.should.equal("S");
+            trx.getDefaultParameters().should.have.property('TENDER');
+            trx.getDefaultParameters().TENDER.should.equal("C");
+            trx.getDefaultParameters().should.have.property('AMT');
+            trx.getDefaultParameters().AMT.should.equal("10");
+            trx.getDefaultParameters().should.have.property('EXPDATE');
+            trx.getDefaultParameters().EXPDATE.should.equal("0210");
+
+        });
+    });
+
+
+
     describe('getValidationParameters', function () {
         it('should return an array', function () {
             trx.getValidationParameters().should.be.a('array');
         });
     });
 
+    describe('setValidationParameters', function () {
+        it('should set validation parameters', function () {
+            trx.setValidationParameters(['TRXTYPE', 'TENDER']);
+            trx.getValidationParameters().should.be.a('array');
+            trx.getValidationParameters().should.include('TRXTYPE');
+            trx.getValidationParameters().should.include('TENDER');
+
+        });
+    });
+
+    describe('appendValidationParameters', function () {
+        it('should append validation parameters', function () {
+            trx.setValidationParameters(['TRXTYPE', 'TENDER']);
+            trx.getValidationParameters().should.be.a('array');
+            trx.getValidationParameters().should.include('TRXTYPE');
+            trx.getValidationParameters().should.include('TENDER');
+
+            trx.appendValidationParameters(['AMT', 'EXPDATE']);
+            trx.getValidationParameters().should.include('TRXTYPE');
+            trx.getValidationParameters().should.include('TENDER');
+            trx.getValidationParameters().should.include('AMT');
+            trx.getValidationParameters().should.include('EXPDATE');
+        });
+    });
 
 });

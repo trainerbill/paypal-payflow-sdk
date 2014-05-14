@@ -2,7 +2,7 @@
 
 var payflow_api = require('../../');
 require('../../test/configure');
-var convertRecurringBillingProfile = payflow_api.getModel("convertRecurringBillingProfile");
+var convertRecurringBillingProfile = payflow_api.getModel("convertrecurringbillingprofile");
 var auth = payflow_api.getModel("authorization");
 
 //Do an authorization and get the PNREF
@@ -11,6 +11,7 @@ var data = {
     EXPDATE: "1118",
     CVV2: "111",
     AMT: "100"
+
 };
 
 try {
@@ -37,6 +38,7 @@ try {
 
         var data = {
             ORIGID: res.response.decoded.PNREF,
+            TENDER: "C",
             AMT: "100",
             PROFILENAME: "MyTestProfile",
             START: datestring,
